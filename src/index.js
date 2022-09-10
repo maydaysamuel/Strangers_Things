@@ -78,18 +78,24 @@ const App = () => {
                     element={<Posts posts={posts} token={token} />}
                 />
                 <Route
-                    path='/posts/:id'
+                    path='/posts/:postID'
                     element={<SinglePostView posts={posts} />}
                 />
+                    <Route
+                        path='/create-post'
+                        element={<CreatePost token={token}
+                            fetchPosts={fetchPosts}
+                            navigate={navigate} />}
+                    />
                 <Route
-                    exact path='/posts/edit-post/:ID'
+                    exact path='/posts/edit-post/:postID'
                     element={<EditPost
-                        posts = { posts }
+                        posts={posts}
                     />}
                 />
                 <Route
                     path='/profile'
-                    element={<Profile />}
+                    element={<Profile user={user}/>}
                 />
                 <Route
                     path='/register'
@@ -105,12 +111,6 @@ const App = () => {
                         setToken={setToken}
                         navigate={navigate}
                     />}
-                />
-                <Route
-                    path='/create-post'
-                    element={<CreatePost token={token}
-                        fetchPosts={fetchPosts}
-                        navigate={navigate} />}
                 />
             </Routes>
         </div>

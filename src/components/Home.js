@@ -4,7 +4,10 @@ import CreatePost from './CreatePost'
 
 const Home = () => {
     return (
-        <h1>Stranger's Things</h1>
+        <>
+            <h1>Stranger's Things</h1>
+            <h2>Craigslist-Lite</h2>
+        </>
     )
 }
 

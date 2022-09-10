@@ -2,6 +2,10 @@ h1 {
     text-transform: uppercase;
 }
 
+h2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 h4 {
     color: #555;
 }
