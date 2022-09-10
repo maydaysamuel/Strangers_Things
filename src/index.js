@@ -82,7 +82,7 @@ const App = () => {
                     element={<SinglePostView posts={posts} />}
                 />
                     <Route
-                        path='/create-post'
+                        exact path='/create-post'
                         element={<CreatePost token={token}
                             fetchPosts={fetchPosts}
                             navigate={navigate} />}
@@ -91,6 +91,7 @@ const App = () => {
                     exact path='/posts/edit-post/:postID'
                     element={<EditPost
                         posts={posts}
+                        token={token}
                     />}
                 />
                 <Route

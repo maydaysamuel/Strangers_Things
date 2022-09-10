@@ -2,6 +2,33 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { createMessage } from '../api'
 
+const SendMessage = ({ token }) => {
+    const [message, setMessage] = useState({content: ''});
+const { postID } = useParams();
+      
+    async function addMessage() {
+      await createMessage({postID, message, token})
+    }
+    
+    return (
+      <form onSubmit={ (event)=> {
+        event.preventDefault();
+        addMessage();
+      }}>
+        <input
+          type='text'
+          placeholder='Enter Message'
+          onChange={ (event) => setMessage({content: event.target.value}) }
+        />
+        <button type='submit'>Send Message</button>
+      </form>
+    )
+  }
+  
+
+
+
+
 const SinglePostView = ({ posts, token }) => {
     const [activateMessage, setActivateMessage] = useState(false);
     const { postID } = useParams();

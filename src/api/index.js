@@ -101,7 +101,7 @@ export const createPost = async (token, {title, description, price, location, wi
   }
 }
 
-export const updatePost = async (token, {title, description, price, location, willDeliver, _id})=> {
+export const updatePost = async ({token, title, description, price, location, willDeliver, _id})=> {
   try {
     const response = await fetch(`${baseURL}/posts/${_id}`, {
       method: "PATCH",
@@ -128,36 +128,43 @@ export const updatePost = async (token, {title, description, price, location, wi
 }
 
 
-export const deletePost = async (token, _id) => {
+export const deletePost = async (postID, token) => {
   try {
-    const response = await fetch(`${baseURL}/posts/`, {
-method: "DELETE",
-headers: {
-  'Content-Type': 'application/json',
-  'Authorization:': `Bearer ${token}`
-}
-})
-const result = await response.json();
-return result;
-  } catch(ex) {
-    console.log('error deleting post')
+      const response = await fetch(`${baseURL}/posts/${postID}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token} `
+      }
+      })
+      const result = await response.json();
+
+      return result
+
+  } catch (error) {
+      console.log('error deleting post')
   }
 }
 
 
-export const createMessage = async ({postID, token, message}) => {
+export const createMessage = async ({ token }) => {
   try {
-    const respons = await fetch(`${baseURL}/posts/${postID}/messages`, {
+    const response = await fetch(`${baseURL}/posts/${postID}/messages`, {
      method: 'POST',
      headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
      },
      body: JSON.stringify({
-      message
+      message: {
+        content: `${message}`
+      }
      })
     })
-  } catch(ex) {
+    const result = await response.json();
+    return result;
+
+  } catch(error) {
     console.log('error creating message')
   }
 }

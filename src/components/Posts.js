@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Card from '@mui/material/Card';
+import { deletePost } from '../api';
 
-const Posts = ({ posts }) => {
+const Posts = ({ token, posts }) => {
   
   return (
     <div id='outer div element'>
@@ -12,7 +12,6 @@ const Posts = ({ posts }) => {
         return (
           
           <div key={_id}>
-          <Card variant="outlined">
             <h3>{title}</h3>
             <p>Description: {description}</p>
             <p>Price: {price}</p>
@@ -22,13 +21,15 @@ const Posts = ({ posts }) => {
             isAuthor ? (
               <>
               <Link to={`/posts/edit-post/${_id}`}>Edit</Link>
-              <button variant='outline' onClick={() => deletePost(token, _id)}>Delete</button>
+              <button variant='outline' onClick={(event) => {
+                event.preventDefault();
+                deletePost(_id, token)
+              }}>Delete</button>
               </>
             ) : (
               <Link to={`/posts/${_id}`}>View</Link>
             )
           }
-          </Card>
           </div>
         )
       })
