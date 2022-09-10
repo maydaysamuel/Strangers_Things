@@ -1,4 +1,5 @@
 import React from 'react';
+import CreatePost from './CreatePost';
 
 const Profile = () => {
     return (

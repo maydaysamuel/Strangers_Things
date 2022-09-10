@@ -1,4 +1,5 @@
-import './style.css';
+import './components/CSS/app.css';
+import { CssBaseline } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Route, BrowserRouter, Routes, useNavigate } from 'react-router-dom';
@@ -8,7 +9,10 @@ import {
     Profile,
     Home,
     Register,
-    Login
+    Login,
+    CreatePost,
+    SinglePostView,
+    EditPost
 } from './components'
 import {
     getPosts,
@@ -16,6 +20,7 @@ import {
 } from './api';
 
 const App = () => {
+
     const [posts, setPosts] = useState([]);
     const [token, setToken] = useState('');
     const [user, setUser] = useState({});
@@ -37,16 +42,16 @@ const App = () => {
 
     async function getMe() {
         const storedToken = window.localStorage.getItem('token');
-        if(!token) {
-            if(storedToken) {
-            setToken(storedToken);
+        if (!token) {
+            if (storedToken) {
+                setToken(storedToken);
             }
             return;
         }
 
         const results = await getUserDetails(token);
-        if(results.success) {
-             setUser(results.data);
+        if (results.success) {
+            setUser(results.data);
         } else {
             console.log(results.error.message);
         }
@@ -62,43 +67,64 @@ const App = () => {
 
     return (
         <div>
-            <Navbar logout={ logout }/>
+            <Navbar logout={logout} token={token} />
             <Routes>
-                <Route path='/' element={ <Home /> } />
-                <Route path='/posts' element={<Posts posts={ posts } />} />
-                <Route path='/profile' element={<Profile />} />
-                <Route path='/register'
-                    element={<Register
-                        setToken={ setToken }
-                        token={ token }
-                        navigate={ navigate }
+                <Route
+                    path='/'
+                    element={<Home />}
+                />
+                <Route
+                    path='/posts'
+                    element={<Posts posts={posts} token={token} />}
+                />
+                <Route
+                    path='/posts/:id'
+                    element={<SinglePostView posts={posts} />}
+                />
+                <Route
+                    exact path='/posts/edit-post/:ID'
+                    element={<EditPost
+                        posts = { posts }
                     />}
                 />
-                <Route path='/login'
-                    element={ <Login
-                        setToken={ setToken }
-                        navigate={ navigate }
+                <Route
+                    path='/profile'
+                    element={<Profile />}
+                />
+                <Route
+                    path='/register'
+                    element={<Register
+                        setToken={setToken}
+                        token={token}
+                        navigate={navigate}
                     />}
+                />
+                <Route
+                    path='/login'
+                    element={<Login
+                        setToken={setToken}
+                        navigate={navigate}
+                    />}
+                />
+                <Route
+                    path='/create-post'
+                    element={<CreatePost token={token}
+                        fetchPosts={fetchPosts}
+                        navigate={navigate} />}
                 />
             </Routes>
         </div>
     )
 }
 
+
 const container = document.querySelector('#container');
 const root = ReactDOM.createRoot(container);
 
 root.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+    <CssBaseline>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </CssBaseline>
 );
-
-/* COMPONENTS WE WILL NEED:
-- Login
-- Registration
-- Posts
-- Profile
-- Navigation
-- Add a post
-*/

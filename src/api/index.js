@@ -75,4 +75,70 @@ export const getUserDetails = async (token) => {
   }
 }
 
-export default getUserDetails;
+export const createPost = async (token, {title, description, price, location, willDeliver})=> {
+  try {
+    const response = await fetch(`${baseURL}/posts`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        post: {
+          title,
+          description,
+          price,
+          location,
+          willDeliver
+        }
+      })
+    })
+    
+    const result = await response.json();
+    return result;
+  } catch(ex) {
+    console.log('error creating a new post')
+  }
+}
+
+export const deletePost = async (token, _id) => {
+  try {
+    const response = await fetch(`${baseURL}/posts/`, {
+method: "DELETE",
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization:': `Bearer ${token}`
+}
+})
+const result = await response.json();
+return result;
+  } catch(ex) {
+    console.log('error deleting post')
+  }
+}
+
+export const updatePost = async (token, {title, description, price, location, willDeliver, _id})=> {
+  try {
+    const response = await fetch(`${baseURL}/posts/${_id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        post: {
+          title,
+          description,
+          price,
+          location,
+          willDeliver
+        }
+      })
+    })
+    
+    const result = await response.json();
+    return result;
+  } catch(ex) {
+    console.log('error updating post')
+  }
+}
