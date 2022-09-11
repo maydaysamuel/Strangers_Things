@@ -9,7 +9,7 @@ const Profile = ({ user }) => {
     return (
       <div>
         <div>
-          <h1>Messages from other users!</h1>
+          <h1>Inbox</h1>
           {
             messages && messages.map(message => {
               const fromUserID = message.fromUser._id;
@@ -29,7 +29,7 @@ const Profile = ({ user }) => {
           }
         </div>
         <div>
-          <h1>Messages from You!</h1>
+          <h1>Sent</h1>
           {
             messages && messages.map(message => {
               const fromUserID = message.fromUser._id;

@@ -147,7 +147,7 @@ export const deletePost = async (postID, token) => {
 }
 
 
-export const createMessage = async ({ token }) => {
+export const createMessage = async ({postID, token, message}) => {
   try {
     const response = await fetch(`${baseURL}/posts/${postID}/messages`, {
      method: 'POST',
@@ -156,15 +156,12 @@ export const createMessage = async ({ token }) => {
       'Authorization': `Bearer ${token}`
      },
      body: JSON.stringify({
-      message: {
-        content: `${message}`
-      }
+      message
      })
     })
-    const result = await response.json();
-    return result;
-
-  } catch(error) {
+    const results = await response.json();
+    console.log(results)
+  } catch(ex) {
     console.log('error creating message')
   }
 }

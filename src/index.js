@@ -1,8 +1,13 @@
 import './components/CSS/app.css';
+
 import { CssBaseline } from '@mui/material';
+
 import React, { useEffect, useState } from 'react';
+
 import ReactDOM from 'react-dom/client';
+
 import { Route, BrowserRouter, Routes, useNavigate } from 'react-router-dom';
+
 import {
     Navbar,
     Posts,
@@ -14,32 +19,45 @@ import {
     SinglePostView,
     EditPost
 } from './components'
+
 import {
     getPosts,
     getUserDetails
 } from './api';
 
+
 const App = () => {
 
+
     const [posts, setPosts] = useState([]);
+
     const [token, setToken] = useState('');
+
     const [user, setUser] = useState({});
 
     const navigate = useNavigate();
 
-    console.log(token, user)
 
     function logout() {
+
         window.localStorage.removeItem('token');
+
         setToken('');
+
         setUser({});
+
     }
+
 
     async function fetchPosts() {
+
         const results = await getPosts(token)
+
         setPosts(results.data.posts);
+
     }
 
+    
     async function getMe() {
         const storedToken = window.localStorage.getItem('token');
         if (!token) {
@@ -79,24 +97,31 @@ const App = () => {
                 />
                 <Route
                     path='/posts/:postID'
-                    element={<SinglePostView posts={posts} />}
+                    element={<SinglePostView
+                        posts={posts}
+                        token={token}
+                        navigate={navigate} />}
                 />
-                    <Route
-                        exact path='/create-post'
-                        element={<CreatePost token={token}
-                            fetchPosts={fetchPosts}
-                            navigate={navigate} />}
-                    />
+                <Route
+                    exact path='/create-post'
+                    element={<CreatePost token={token}
+                        fetchPosts={fetchPosts}
+                        navigate={navigate} />}
+                />
                 <Route
                     exact path='/posts/edit-post/:postID'
                     element={<EditPost
                         posts={posts}
                         token={token}
+                        navigate={navigate}
                     />}
                 />
                 <Route
                     path='/profile'
-                    element={<Profile user={user}/>}
+                    element={<Profile
+                        user={user}
+                        navigate={navigate}
+                    />}
                 />
                 <Route
                     path='/register'
