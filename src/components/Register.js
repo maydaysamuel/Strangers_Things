@@ -31,7 +31,7 @@ const Register = ({ setToken, navigate }) => {
             <TextField id="outlined-basic" label="Username" variant="outlined"
                 onChange={(event) => setUsername(event.target.value)}
             />
-            <TextField id="outlined-basic" label="Password" variant="outlined"
+            <TextField id="outlined-basic" label="Password" variant="outlined" type='password'
                 onChange={(event) => setPassword(event.target.value)}
             />
         
