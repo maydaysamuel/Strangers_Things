@@ -1,12 +1,8 @@
-import './components/CSS/app.css';
-
 import { CssBaseline } from '@mui/material';
-
 import React, { useEffect, useState } from 'react';
-
 import ReactDOM from 'react-dom/client';
-
 import { Route, BrowserRouter, Routes, useNavigate } from 'react-router-dom';
+import './style.css'
 
 import {
     Navbar,
@@ -28,36 +24,25 @@ import {
 
 const App = () => {
 
-
     const [posts, setPosts] = useState([]);
-
     const [token, setToken] = useState('');
-
     const [user, setUser] = useState({});
-
     const navigate = useNavigate();
 
 
     function logout() {
-
         window.localStorage.removeItem('token');
-
         setToken('');
-
         setUser({});
-
     }
 
 
     async function fetchPosts() {
-
         const results = await getPosts(token)
-
         setPosts(results.data.posts);
-
     }
 
-    
+
     async function getMe() {
         const storedToken = window.localStorage.getItem('token');
         if (!token) {
@@ -84,7 +69,7 @@ const App = () => {
     }, [token])
 
     return (
-        <div>
+        <div id='main-nav'>
             <Navbar logout={logout} token={token} />
             <Routes>
                 <Route
@@ -93,7 +78,10 @@ const App = () => {
                 />
                 <Route
                     path='/posts'
-                    element={<Posts posts={posts} token={token} />}
+                    element={<Posts
+                        posts={posts}
+                        token={token}
+                         />}
                 />
                 <Route
                     path='/posts/:postID'

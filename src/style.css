@@ -1,0 +1,82 @@
+nav {
+    background-color: dodgerblue;
+    text-shadow: 0.1rem 0.1rem #555;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.welcome {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+}
+
+.welcome-desc {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+}
+
+.search-form {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.post-desc {
+    border: 0.1rem solid #555;
+    text-align: center;
+    margin: 1rem 10rem 1rem 10rem;
+    padding: 0.5rem;
+}
+
+.register, .register-button {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.register-message {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+}
+
+.login, .login-button {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.inbox, .sent {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+}
+
+.sent-message, .inbox-message {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+    border-bottom: 0.1rem solid #555;
+    margin: 1rem 10rem 1rem 10rem;
+}
+
+.create-post-button {
+    text-align: center;
+}
+
+.edit-delete-view {
+    text-decoration: none;
+}
+
+h2 {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+}
+
+h3 {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+}

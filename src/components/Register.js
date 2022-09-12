@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { registerUser } from '../api';
-import { navigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 const Register = ({ setToken, navigate }) => {
     const [username, setUsername] = useState('');
@@ -12,30 +13,34 @@ const Register = ({ setToken, navigate }) => {
             setToken(results.data.token);
             window.localStorage.setItem('token', results.data.token);
             navigate('/profile');
-            // ************ stay logged in? **********
         } else {
-            console.log(results.error.message)
+            console.log(results.error.message);
         }
     }
 
     return (
+        <>
+        <div>
+            <h1 className='register-message'>Please register below:</h1>
+        </div>
+        <div className='register'>
         <form onSubmit={(event) => {
-            event.preventDefault()
+            event.preventDefault();
             handleSubmit();
         }}>
-            <input
-                type='text'
-                placeholder='Enter Username'
+            <TextField id="outlined-basic" label="Username" variant="outlined"
                 onChange={(event) => setUsername(event.target.value)}
             />
-            <input
-                type='password'
-                placeholder='Enter Password'
+            <TextField id="outlined-basic" label="Password" variant="outlined"
                 onChange={(event) => setPassword(event.target.value)}
             />
-            <button
-                type='submit'>Submit</button>
-        </form>
+        
+        <div className='register-button'>
+            <Button variant='outlined' size='small' type='submit'>Submit</Button>
+            </div>
+            </form>
+            </div>
+        </>
     )
 }
 

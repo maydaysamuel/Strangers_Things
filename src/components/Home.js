@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import CreatePost from './CreatePost'
 
 const Home = () => {
     return (
         <>
-            <h1>Stranger's Things</h1>
-            <h2>Craigslist-Lite</h2>
+            <h1 className='welcome'>Welcome to Stranger's Things</h1>
+            <p className='welcome-desc'>A site for buying and selling everything you need.<br />
+            To enjoy the full site, please click "Register" above.</p>
         </>
     )
 }
